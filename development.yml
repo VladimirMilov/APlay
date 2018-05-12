@@ -16,7 +16,9 @@ services:
   events-client:
     image: 'events-client'
     build: events-client
-    command: ["./wait-for.sh", "rabbitmq-broker:5672", "--timeout=60", "--", "node", "index.js"]
+    command: ["./wait-for.sh", "rabbitmq-broker:5672", "--timeout=60", "--", "node", "./bin/www"]
+    ports:
+      - '3003:3000'
     environment:
       - QUEUE_NAME=events-queue-team
       - TOPIC=fifa.worldcup.#.Russia.#
@@ -27,7 +29,9 @@ services:
   events-client2:
     image: 'events-client'
     build: events-client
-    command: ["./wait-for.sh", "rabbitmq-broker:5672", "--timeout=60", "--", "node", "index.js"]
+    command: ["./wait-for.sh", "rabbitmq-broker:5672", "--timeout=60", "--", "node", "./bin/www"]
+    ports:
+      - '3001:3000'
     environment:
       - QUEUE_NAME=events-queue-stadium
       - TOPIC=fifa.worldcup.*.1.*.*.*
@@ -38,7 +42,9 @@ services:
   events-client3:
     image: 'events-client'
     build: events-client
-    command: ["./wait-for.sh", "rabbitmq-broker:5672", "--timeout=60", "--", "node", "index.js"]
+    command: ["./wait-for.sh", "rabbitmq-broker:5672", "--timeout=60", "--", "node", "./bin/www"]
+    ports:
+      - '3002:3000'
     environment:
       - QUEUE_NAME=events-queue-goals
       - TOPIC=fifa.worldcup.#.goal

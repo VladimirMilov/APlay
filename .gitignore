@@ -1,0 +1,60 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+package-lock.json
+
+# Dependency directories
+node_modules
+/events-client/node_modules/
+jspm_packages
+
+# Babel cache directory
+babel_cache
+
+# Compiled aaartifacts
+main.js
+main.js.map
+sonar-project.properties
+
+# OSX
+#
+.DS_Store
+
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+
+# Android/IntelliJ
+#
+build/
+.idea
+.gradle
+local.properties
+*.iml
+
+# node.js
+#
+npm-debug.log
+yarn-error.log
+
+# testing
+#
+
+/coverage/
