@@ -1,0 +1,48 @@
+version: '3'
+services:
+  rabbitmq-broker:
+    image: 'rabbitmq:3-management'
+    ports:
+      - '8080:15672'
+      - '5672:5672'
+    
+  events-api:
+    image: 'events-api'
+    build: events-api
+    command: ["./wait-for.sh", "rabbitmq-broker:5672", "--timeout=60", "--", "java", "-jar", "service.jar"]
+    depends_on:
+      - rabbitmq-broker
+      
+  events-client:
+    image: 'events-client'
+    build: events-client
+    command: ["./wait-for.sh", "rabbitmq-broker:5672", "--timeout=60", "--", "node", "index.js"]
+    environment:
+      - QUEUE_NAME=events-queue-team
+      - TOPIC=fifa.worldcup.#.Russia.#
+    depends_on:
+      - events-api
+      - rabbitmq-broker
+
+  events-client2:
+    image: 'events-client'
+    build: events-client
+    command: ["./wait-for.sh", "rabbitmq-broker:5672", "--timeout=60", "--", "node", "index.js"]
+    environment:
+      - QUEUE_NAME=events-queue-stadium
+      - TOPIC=fifa.worldcup.*.1.*.*.*
+    depends_on:
+      - events-api
+      - rabbitmq-broker
+
+  events-client3:
+    image: 'events-client'
+    build: events-client
+    command: ["./wait-for.sh", "rabbitmq-broker:5672", "--timeout=60", "--", "node", "index.js"]
+    environment:
+      - QUEUE_NAME=events-queue-goals
+      - TOPIC=fifa.worldcup.#.goal
+    depends_on:
+      - events-api
+      - rabbitmq-broker
+
