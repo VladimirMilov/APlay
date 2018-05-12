@@ -23,7 +23,7 @@ app.io = require('socket.io')();
 
 require('./routes/sockets')(app);
 
-amqp.connect('amqp://localhost:5672', function(err, conn) {
+amqp.connect('amqp://rabbitmq-broker', function(err, conn) {
 
     conn.createChannel(function(err, channel) {
 
