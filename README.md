@@ -1,3 +1,8 @@
+# Link to the frontend part of Aplay application: https://github.com/ivaylozhekov/APlayVR
+
+
+
+
 # World Cup events streaming API
 ***
 ## Introduction
